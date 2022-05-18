@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 # Add the necessary imports for the starter code.
-from ml import process_data
+from ml.data import process_data
 
 # Configure logging
 logging.basicConfig(
