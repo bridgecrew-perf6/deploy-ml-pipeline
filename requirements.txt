@@ -14,6 +14,7 @@ async-timeout==4.0.2
 asyncssh==2.10.1
 atpublic==3.0.1
 attrs==21.4.0
+autopep8==1.6.0
 Babel==2.10.1
 backcall==0.2.0
 backports.functools-lru-cache==1.6.4
@@ -24,7 +25,7 @@ botocore==1.24.21
 brotlipy==0.7.0
 cached-property==1.5.2
 cachetools==5.0.0
-certifi==2021.10.8
+certifi==2022.5.18
 cffi==1.15.0
 charset-normalizer==2.0.12
 click==8.1.3
