@@ -4,7 +4,7 @@
 To create a conda environment for running the project:
 
 ```
-conda env create --name deploy-ml-pipeline --file=deploy-ml-pipeline.yml
+conda env create --name deploy-ml-pipeline --file=requirements.yml
 ```
 
 To create a virtual environment using requirements.txt:
