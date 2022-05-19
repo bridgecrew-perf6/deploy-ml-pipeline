@@ -1,4 +1,6 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
 
 
 # Optional: implement hyperparameter tuning.
@@ -14,10 +16,25 @@ def train_model(X_train, y_train):
     Returns
     -------
     model
-        Trained machine learning model.
+        Trained Random Forest model with the 
+        best parameters after performing grid search.
     """
 
-    pass
+    param_grid = { 
+    'n_estimators': [10, 20, 30],
+    'max_features': ['auto', 'sqrt', 'log2'],
+    'max_depth' : [4, 5, 6, 7, 8],
+    'criterion' :['gini', 'entropy']
+    }
+
+    model = RandomForestClassifier()
+
+    grid_search = GridSearchCV(model, param_grid, cv=5,
+    )
+
+    grid_search.fit(X_train, y_train)
+
+    return grid_search.best_estimator_
 
 
 def compute_model_metrics(y, preds):
@@ -47,8 +64,9 @@ def inference(model, X):
     """ Run model inferences and return the predictions.
     Inputs
     ------
-    model : ???
-        Trained machine learning model.
+    model : 
+        Trained Random Forest model with the 
+        best parameters after performing grid search.
     X : np.array
         Data used for prediction.
     Returns
@@ -56,4 +74,4 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    return model.predict(X)
