@@ -18,6 +18,7 @@ Before y ou run this project, make sure you satisfy the following requirements:
 
    ```
    conda env create --name deploy-ml-pipeline --file=requirements.yml
+   conda activate deploy-ml-pipeline
    ```
 
    To create a virtual environment using requirements.txt:
@@ -33,4 +34,12 @@ Before y ou run this project, make sure you satisfy the following requirements:
    ```
    python train_model/run.py
    ```
+
+## Running the tests
+
+To run the tests:
+
+```
+python -m pytest
+```
 
