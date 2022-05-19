@@ -64,13 +64,21 @@ logging.info("Fbeta score: %s", fbeta)
 logging.info("Precision: %s", precision)
 logging.info("Recall: %s", recall)
 
-# Saving the model
+# Saving the model and the Onehotencoder
 try:
     joblib.dump(
             model,
             "../model/" +
             'model.pkl')
     logging.info("Saved best model.")
+
+    joblib.dump(
+            encoder,
+            "../model/" +
+            'encoder.pkl')
+    logging.info("Saved Onehotencoder.")
+
 except Exception as err:
-    logging.error("Error while saving best model: %s ", err)
+    logging.error("Error while saving best model and encoder: %s ", 
+                  err)
 
