@@ -44,7 +44,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Get latest version of the data
       run: |
-        dvc remote add -d s3_remote s3://deploy-ml-pipeline-sophieb
         dvc pull
     - name: Test with pytest
       run: |
