@@ -23,6 +23,11 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.8"
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::813274536671:user/deploy-ml-pipeline-sophieb
+        aws-region: us-east-1
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -34,6 +39,9 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Get latest version of the data
+      run: |
+        dvc pull
     - name: Test with pytest
       run: |
         python -m pytest
