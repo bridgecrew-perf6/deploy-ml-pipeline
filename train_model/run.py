@@ -73,6 +73,12 @@ try:
     logging.info("Saved best model.")
 
     joblib.dump(
+            lb,
+            "../model/" +
+            'lb.pkl')
+    logging.info("Saved LabelBinarizer.")
+
+    joblib.dump(
             encoder,
             "../model/" +
             'encoder.pkl')
