@@ -60,7 +60,7 @@ def test_inference(test):
     encoder = joblib.load("model/encoder.pkl")
     lb = joblib.load("model/lb.pkl")
 
-    X_test, y_test, encoder, lb = process_data(
+    test_data, _, encoder, lb = process_data(
         test, categorical_features=CAT_FEATURES, 
         label=None, training=False,
         encoder=encoder, lb=lb
@@ -68,6 +68,6 @@ def test_inference(test):
 
     model = joblib.load("model/model.pkl")
     
-    preds = inference(model, X_test)
+    preds = inference(model, test_data)
 
     assert isinstance(preds, np.ndarray)
