@@ -1,8 +1,12 @@
 # deploy-ml-pipeline
 
-This Machine Learning pipeline trains a Random Forest model on Census data and deploys the best model using FastAPI and Heroku.
+This Machine Learning pipeline trains a Random Forest model to classify the salary of individuals (<=50K and >50K) using Census data. It also deploys the best model using FastAPI and Heroku.
 
 ## Contents of the project
+
+This project contains the following:
+
+* **data:** Data for training and testing the model.
 
 ## Running the project
 
