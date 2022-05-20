@@ -28,6 +28,10 @@ CAT_FEATURES = [
 def data():
     return pd.read_csv("data/clean.csv")
 
+@pytest.fixture
+def test():
+    return pd.read_csv("data/test.csv")
+
 def test_process_data(data):
 
     X_train, y_train, encoder, lb = process_data(
@@ -51,15 +55,13 @@ def test_train_model(data):
     assert isinstance(model, RandomForestClassifier)
 
 
-def test_inference(data):
+def test_inference(test):
 
     encoder = joblib.load("model/encoder.pkl")
     lb = joblib.load("model/lb.pkl")
 
-    data.drop("salary", axis=1, inplace=True)
-
     X_test, y_test, encoder, lb = process_data(
-        data, categorical_features=CAT_FEATURES, 
+        test, categorical_features=CAT_FEATURES, 
         label=None, training=False,
         encoder=encoder, lb=lb
     )
