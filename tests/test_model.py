@@ -56,8 +56,11 @@ def test_inference(data):
     encoder = joblib.load("model/encoder.pkl")
     lb = joblib.load("model/lb.pkl")
 
+    data.drop("salary", axis=1, inplace=True)
+
     X_test, y_test, encoder, lb = process_data(
-        data, categorical_features=CAT_FEATURES, label="salary", training=False,
+        data, categorical_features=CAT_FEATURES, 
+        label=None, training=False,
         encoder=encoder, lb=lb
     )
 
