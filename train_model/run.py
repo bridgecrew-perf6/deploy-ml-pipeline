@@ -42,14 +42,14 @@ cat_features = [
     "native-country",
 ]
 
-X_train, y_train, encoder, lb = process_data(
+X_train, y_train, encoder_train, lb_train = process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
 
 # Proces the test data with the process_data function.
-X_test, y_test, encoder, lb = process_data(
+X_test, y_test, _, _ = process_data(
     test, categorical_features=cat_features, label="salary", training=False,
-    encoder=encoder, lb=lb
+    encoder=encoder_train, lb=lb_train
 )
 
 # Train and save a model.
@@ -73,13 +73,13 @@ try:
     logging.info("Saved best model.")
 
     joblib.dump(
-            lb,
+            lb_train,
             "../model/" +
             'lb.pkl')
     logging.info("Saved LabelBinarizer.")
 
     joblib.dump(
-            encoder,
+            encoder_train,
             "../model/" +
             'encoder.pkl')
     logging.info("Saved Onehotencoder.")
@@ -87,4 +87,3 @@ try:
 except Exception as err:
     logging.error("Error while saving best model and encoder: %s ", 
                   err)
-

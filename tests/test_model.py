@@ -58,15 +58,16 @@ def test_train_model(data):
 def test_inference(test):
 
     encoder = joblib.load("model/encoder.pkl")
+
     lb = joblib.load("model/lb.pkl")
 
-    test_data, _, encoder, lb = process_data(
+    model = joblib.load("model/model.pkl")
+
+    test_data, _, _, _ = process_data(
         test, categorical_features=CAT_FEATURES, 
         label=None, training=False,
         encoder=encoder, lb=lb
     )
-
-    model = joblib.load("model/model.pkl")
     
     preds = inference(model, test_data)
 
