@@ -58,9 +58,7 @@ def test_train_model(data):
 def test_inference(test):
 
     encoder = joblib.load("model/encoder.pkl")
-
     lb = joblib.load("model/lb.pkl")
-
     model = joblib.load("model/model.pkl")
 
     test_data, _, _, _ = process_data(
