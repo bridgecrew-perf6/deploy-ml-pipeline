@@ -86,3 +86,4 @@ def inference(model, X):
         Predictions from the model.
     """
     return model.predict(X)
+        

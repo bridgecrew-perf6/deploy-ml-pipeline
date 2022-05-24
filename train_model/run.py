@@ -10,6 +10,7 @@ from ml.data import process_data
 from ml.model import train_model
 from ml.model import compute_model_metrics
 from ml.model import inference
+from ml.metrics_slices import compute_metrics_slices
 
 # Configure logging
 logging.basicConfig(
@@ -24,7 +25,7 @@ try:
     data = pd.read_csv("../data/clean.csv")
     logging.info("Load clean data")
 except FileNotFoundError:
-    logging.info("Clean data CSV file not found")
+    logging.error("Clean data CSV file not found")
 
 # Optional enhancement, use K-fold cross validation instead of a
 # train-test split.
@@ -57,6 +58,7 @@ model = train_model(X_train, y_train)
 
 preds = inference(model, X_test)
 
+# Compute metrics for all of the test data
 fbeta, precision, recall = compute_model_metrics(y_test, preds)
 
 logging.info("Model metrics: ")
@@ -64,7 +66,23 @@ logging.info("Fbeta score: %s", fbeta)
 logging.info("Precision: %s", precision)
 logging.info("Recall: %s", recall)
 
-# Saving the model and the Onehotencoder
+#Compute slices metrics for a given categorical feature
+cat_feature = "education"
+metric_slices = compute_metrics_slices(model, encoder_train, 
+                                       lb_train, test, cat_feature)
+
+logging.info("Model metrics for categorical feature %s", cat_feature)
+logging.info(metric_slices)
+
+# Save the slices metrics to text file
+try:
+    with open("../slice_output.txt", "a") as file_object:
+        file_object.write(str(metric_slices))
+    logging.info("Saving slice metrics to slice_output.txt")
+except FileNotFoundError:
+    logging.error("slice_output.txt file not found")
+
+# Save the model and the Onehotencoder
 try:
     joblib.dump(
             model,
