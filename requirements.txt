@@ -1,7 +1,7 @@
 autopep8==1.6.0
 dvc==2.10.2
 dvc[s3]==2.10.2
-fastapi==0.76.0
+fastapi==0.78.0
 flake8==4.0.1
 pandas==1.4.2
 numpy==1.22.3
