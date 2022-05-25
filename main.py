@@ -1,7 +1,33 @@
+import joblib
+import logging
+import pandas as pd
+import constants as constans_project
+
 from typing import Union
 from webbrowser import BaseBrowser
 from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
+
+from src.ml.data import process_data
+from src.ml.model import inference
+
+# Configure logging
+logging.basicConfig(
+    filename='logs/ml-pipeline.log',
+    level=logging.INFO,
+    filemode='w',
+    format='%(name)s - %(levelname)s - %(message)s')
+
+
+ENCODER = joblib.load(constans_project.MODEL_PATH +
+                      constans_project.ENCODER_FILE)
+LB = joblib.load(constans_project.MODEL_PATH +
+                 constans_project.LB_FILE)
+MODEL = joblib.load(constans_project.MODEL_PATH +
+                    constans_project.MODEL_FILE)
+
+CAT_FEATURES = constans_project.CAT_FEATURES
 
 class CensusInputItem(BaseModel):
     age: int
@@ -48,4 +74,22 @@ async def say_greeting():
 
 @app.post("/inference")
 async def model_inference(item: CensusInputItem):
-    return item
+
+    df_preds = pd.DataFrame(jsonable_encoder(item),
+                            index=["value"])
+    
+    test_data, _, _, _ = process_data(
+        df_preds, 
+        categorical_features=CAT_FEATURES, 
+        label=None, training=False,
+        encoder=ENCODER, lb=LB
+    )
+    
+    preds = inference(MODEL, test_data)
+
+    if preds[0] == 0:
+        item_prediction = '<=50K'
+    else:
+        item_prediction = '>50K'
+
+    return {"prediction": item_prediction}

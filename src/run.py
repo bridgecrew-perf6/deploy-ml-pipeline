@@ -12,14 +12,6 @@ from ml.model import compute_model_metrics
 from ml.model import inference
 from ml.metrics_slices import compute_metrics_slices
 
-# Configure logging
-logging.basicConfig(
-    filename='../logs/ml-pipeline.log',
-    level=logging.INFO,
-    filemode='w',
-    format='%(name)s - %(levelname)s - %(message)s')
-
-
 # Add code to load in the data.
 try:
     data = pd.read_csv("../data/clean.csv")

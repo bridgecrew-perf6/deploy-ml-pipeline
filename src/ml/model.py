@@ -4,13 +4,6 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 
-# Configure logging
-logging.basicConfig(
-    filename='../logs/ml-pipeline.log',
-    level=logging.INFO,
-    filemode='w',
-    format='%(name)s - %(levelname)s - %(message)s')
-
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
     """
