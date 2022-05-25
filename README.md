@@ -39,6 +39,14 @@ Before y ou run this project, make sure you satisfy the following requirements:
    python train_model/run.py
    ```
 
+3. Run the REST API that serves the model locally:
+
+   ```
+   uvicorn main:app --reload
+   ```
+
+>Note: To check the docs, go to http://127.0.0.1:8000/docs.
+
 ## Running the tests
 
 To run the tests:

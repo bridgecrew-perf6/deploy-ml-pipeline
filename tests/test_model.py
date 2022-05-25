@@ -9,9 +9,9 @@ from sklearn.ensemble import RandomForestClassifier
 
 sys.path.insert(0, "../")
 
-from train_model.ml.data import process_data
-from train_model.ml.model import train_model
-from train_model.ml.model import inference
+from src.ml.data import process_data
+from src.ml.model import train_model
+from src.ml.model import inference
 
 CAT_FEATURES = [
     "workclass",
