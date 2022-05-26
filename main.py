@@ -20,8 +20,6 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
 
-
-
 ENCODER = joblib.load(constans_project.MODEL_PATH +
                       constans_project.ENCODER_FILE)
 LB = joblib.load(constans_project.MODEL_PATH +
