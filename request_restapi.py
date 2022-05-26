@@ -17,6 +17,12 @@ data = {"age": 43,
         "native-country": "United-States"
 }
 
-response = requests.post("http://127.0.0.1:8000/inference/", data=json.dumps(data))
+print("Data")
+print(data)
 
-print(response.json())
+response = requests.post("https://deploy-ml-pipeline-app.herokuapp.com/inference/", 
+                         data=json.dumps(data)
+)
+
+print("Status code: ", response.status_code)
+print("Prediction", response.json())
