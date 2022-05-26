@@ -20,12 +20,6 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
 
-# Configure logging
-logging.basicConfig(
-    filename='logs/ml-pipeline.log',
-    level=logging.INFO,
-    filemode='w',
-    format='%(name)s - %(levelname)s - %(message)s')
 
 
 ENCODER = joblib.load(constans_project.MODEL_PATH +
