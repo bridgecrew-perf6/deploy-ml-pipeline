@@ -1,7 +1,6 @@
 # Script to train machine learning model.
-import joblib
-import logging
 import pandas as pd
+import joblib
 
 from sklearn.model_selection import train_test_split
 
@@ -15,14 +14,13 @@ from ml.metrics_slices import compute_metrics_slices
 # Add code to load in the data.
 try:
     data = pd.read_csv("../data/clean.csv")
-    logging.info("Load clean data")
+    print("Load clean data")
 except FileNotFoundError:
-    logging.error("Clean data CSV file not found")
+    print("Clean data CSV file not found")
 
 # Optional enhancement, use K-fold cross validation instead of a
 # train-test split.
 train, test = train_test_split(data, test_size=0.20)
-
 
 cat_features = [
     "workclass",
@@ -53,26 +51,26 @@ preds = inference(model, X_test)
 # Compute metrics for all of the test data
 fbeta, precision, recall = compute_model_metrics(y_test, preds)
 
-logging.info("Model metrics: ")
-logging.info("Fbeta score: %s", fbeta)
-logging.info("Precision: %s", precision)
-logging.info("Recall: %s", recall)
+print("Model metrics: ")
+print("Fbeta score: %s", fbeta)
+print("Precision: %s", precision)
+print("Recall: %s", recall)
 
 #Compute slices metrics for a given categorical feature
 cat_feature = "education"
 metric_slices = compute_metrics_slices(model, encoder_train, 
                                        lb_train, test, cat_feature)
 
-logging.info("Model metrics for categorical feature %s", cat_feature)
-logging.info(metric_slices)
+print("Model metrics for categorical feature %s", cat_feature)
+print(metric_slices)
 
 # Save the slices metrics to text file
 try:
     with open("../slice_output.txt", "a") as file_object:
         file_object.write(str(metric_slices))
-    logging.info("Saving slice metrics to slice_output.txt")
+    print("Saving slice metrics to slice_output.txt")
 except FileNotFoundError:
-    logging.error("slice_output.txt file not found")
+    print("slice_output.txt file not found")
 
 # Save the model and the Onehotencoder
 try:
@@ -80,20 +78,20 @@ try:
             model,
             "../model/" +
             'model.pkl')
-    logging.info("Saved best model.")
+    print("Saved best model.")
 
     joblib.dump(
             lb_train,
             "../model/" +
             'lb.pkl')
-    logging.info("Saved LabelBinarizer.")
+    print("Saved LabelBinarizer.")
 
     joblib.dump(
             encoder_train,
             "../model/" +
             'encoder.pkl')
-    logging.info("Saved Onehotencoder.")
+    print("Saved Onehotencoder.")
 
 except Exception as err:
-    logging.error("Error while saving best model and encoder: %s ", 
+    print("Error while saving best model and encoder: %s ", 
                   err)

@@ -1,8 +1,5 @@
-import logging
-
 from sklearn.metrics import fbeta_score, precision_score, recall_score
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import LogisticRegression
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -20,25 +17,12 @@ def train_model(X_train, y_train):
         Trained Random Forest model with the 
         best parameters after performing grid search.
     """
+    model = LogisticRegression(max_iter=300, random_state=42)
 
-    param_grid = { 
-    'n_estimators': [10, 20, 30],
-    'max_features': ['auto', 'sqrt', 'log2'],
-    'max_depth' : [4, 5, 6, 7, 8],
-    'criterion' :['gini', 'entropy']
-    }
+    model.fit(X_train, y_train)
 
-    model = RandomForestClassifier()
+    return model
 
-    grid_search = GridSearchCV(model, param_grid, cv=5,
-    )
-
-    grid_search.fit(X_train, y_train)
-
-    logging.info("Best model parameters %s ", 
-                       grid_search.best_params_)
-
-    return grid_search.best_estimator_
 
 
 def compute_model_metrics(y, preds):

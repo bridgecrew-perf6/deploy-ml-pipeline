@@ -4,9 +4,9 @@ Last updated: May 2022
 
 ## Model Details
 
-This is a RandomForestClassifier with the following hyperparameters:
+This is a LogisticRegression model with the following hyperparameters:
 
-{'criterion': 'gini', 'max_depth': 8, 'max_features': 'sqrt', 'n_estimators': 20} 
+{"max_iter": 300, "random_state": 42} 
 
 ## Intended Use
 
@@ -39,9 +39,9 @@ The Census data was split into training and test with test_size = 20%
 ## Metrics
 The model achived the following metrics:
 
-Fbeta score=0.7744593202883625
-Precision=0.48360128617363346
-Recall=0.5954077593032463
+Fbeta score: 0.7460035523978685
+Precision: 0.27433050293925537
+Recall: 0.4011461318051576
 
 ## Ethical Considerations
 

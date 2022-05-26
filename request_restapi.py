@@ -17,6 +17,6 @@ data = {"age": 43,
         "native-country": "United-States"
 }
 
-req = requests.post("http://127.0.0.1:8000/inference/", data=json.dumps(data))
+response = requests.post("http://127.0.0.1:8000/inference/", data=json.dumps(data))
 
-print(req.json())
+print(response.json())

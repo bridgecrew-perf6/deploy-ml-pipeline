@@ -19,3 +19,6 @@ MODEL_PATH = "model/"
 MODEL_FILE = "model.pkl"
 LB_FILE = "lb.pkl"
 ENCODER_FILE = "encoder.pkl"
+
+DATA_FOLDER = "data/"
+CLEAN_DATA = "clean.csv"

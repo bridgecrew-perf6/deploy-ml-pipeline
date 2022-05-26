@@ -6,6 +6,7 @@ import sys
 
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 sys.path.insert(0, "../")
 
@@ -52,7 +53,7 @@ def test_train_model(data):
 
     model = train_model(X_train, y_train)
 
-    assert isinstance(model, RandomForestClassifier)
+    assert isinstance(model, LogisticRegression)
 
 
 def test_inference(test):

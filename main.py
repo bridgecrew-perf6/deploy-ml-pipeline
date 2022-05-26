@@ -78,14 +78,15 @@ async def model_inference(item: CensusInputItem):
     df_preds = pd.DataFrame(jsonable_encoder(item),
                             index=["value"])
     
-    test_data, _, _, _ = process_data(
+    data, _, _, _ = process_data(
         df_preds, 
         categorical_features=CAT_FEATURES, 
         label=None, training=False,
         encoder=ENCODER, lb=LB
     )
     
-    preds = inference(MODEL, test_data)
+    preds = inference(MODEL, data)
+
 
     if preds[0] == 0:
         item_prediction = '<=50K'
